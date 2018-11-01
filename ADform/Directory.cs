@@ -25,14 +25,22 @@ namespace Scavenger
         {
             form.OUTextBox = null;
             SearchResult result = GetUser();
-            ResultPropertyCollection fields = result.Properties;
-            foreach(string propField in fields.PropertyNames)
+            //ResultPropertyCollection fields = result.Properties;
+            DirectoryEntry user = result.GetDirectoryEntry();
+            //form.OUTextBox = user.Properties["sn"].Value.ToString();
+            for (int counter = 0; counter < user.Properties["memberof"].Count; counter++)
+            {
+                form.OUTextBox = user.Properties["memberof"][counter].ToString() + form.OUTextBox;
+
+            }
+
+            /* foreach(string propField in fields.PropertyNames)
             {
                 foreach(Object name in fields[propField])
                 {
                     form.OUTextBox = propField + " : " + name + Environment.NewLine + form.OUTextBox;
                 }
-            }
+            }*/
         }
         public void CallGetOrgsUnits(object sender, EventArgs e)
         {
@@ -52,7 +60,7 @@ namespace Scavenger
             // This function requires Imports System.Net and Imports System.DirectoryServices.Protocols
             LdapConnection ldapConnection = new LdapConnection(new LdapDirectoryIdentifier(ldapServer));
             //Specify LDAP timeout
-            TimeSpan mytimeout = new TimeSpan(0, 0, 3);
+            TimeSpan mytimeout = new TimeSpan(0, 0, 1);
             bool ldapOK = false;
             try
             {
@@ -104,7 +112,11 @@ namespace Scavenger
         {
             DirectoryEntry ldapConnection = GetLdapConnection();
             DirectorySearcher searcher = new DirectorySearcher(ldapConnection);
-            searcher.Filter = "(cn=" + form.userField + ")";
+            searcher.PropertiesToLoad.Add("sammaccountname");
+            searcher.PropertiesToLoad.Add("sn");
+            searcher.PropertiesToLoad.Add("memberof");
+
+            searcher.Filter = "(|(cn=" + form.userField + ")(samaccountname=" + form.userField + "))";
             SearchResult result = searcher.FindOne();
             searcher.Dispose();
             ldapConnection.Dispose(); 
