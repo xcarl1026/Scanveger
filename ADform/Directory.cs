@@ -28,9 +28,10 @@ namespace Scavenger
             //ResultPropertyCollection fields = result.Properties;
             DirectoryEntry user = result.GetDirectoryEntry();
             //form.OUTextBox = user.Properties["sn"].Value.ToString();
+            form.OUTextBox = user.Properties["samaccountname"].Value.ToString();
             for (int counter = 0; counter < user.Properties["memberof"].Count; counter++)
             {
-                form.OUTextBox = user.Properties["memberof"][counter].ToString() + form.OUTextBox;
+                form.OUTextBox += Environment.NewLine + user.Properties["memberof"][counter].ToString()/*.Split(',')*/; //+ Environment.NewLine + form.OUTextBox;
 
             }
 
