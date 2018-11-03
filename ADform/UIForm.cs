@@ -28,7 +28,7 @@ namespace Scavenger
         private void TButton_Click(object sender, EventArgs e)
         {
             //domainName = domainTField.Text;
-            dValue.Text = "You entered:" + domainField;
+            //dValue.Text = "You entered:" + domainField;
             
             OnTButtonClicked();
             
@@ -59,6 +59,7 @@ namespace Scavenger
    
         private void SearchButton_Click(object sender, EventArgs e)
         {
+            dValue.Text = "You entered:" + domainField;
             OnSearchButtonClicked();
         }
 
@@ -92,5 +93,6 @@ namespace Scavenger
             set { userTField.Text = value; }
 
         }
+
     }
 }

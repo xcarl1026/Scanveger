@@ -21,6 +21,7 @@ namespace Scavenger
             Directory directory = new Directory(gui); 
             //Subscribe
             gui.TButtonClicked += directory.CallGetOrgsUnits;
+            gui.SearchButtonClicked += directory.CallGetOrgsUnits;
             gui.SearchButtonClicked += directory.DisplayUserResult;
             Application.Run(gui);
 

@@ -33,148 +33,181 @@ namespace Scavenger
         /// </summary>
         private void InitializeComponent()
         {
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.TButton = new System.Windows.Forms.Button();
             this.domainLabel = new System.Windows.Forms.Label();
             this.domainTField = new System.Windows.Forms.TextBox();
             this.dValue = new System.Windows.Forms.Label();
             this.displayOus = new System.Windows.Forms.RichTextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.userLabel = new System.Windows.Forms.Label();
-            this.userTField = new System.Windows.Forms.TextBox();
             this.userSearch = new System.Windows.Forms.Button();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.userTField = new System.Windows.Forms.TextBox();
+            this.userLabel = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.AccountsButton = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 39.54546F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60.45454F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 99F));
-            this.tableLayoutPanel1.Controls.Add(this.TButton, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.domainLabel, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.domainTField, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.dValue, 1, 1);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 35);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(373, 79);
-            this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // TButton
-            // 
-            this.TButton.Location = new System.Drawing.Point(276, 3);
-            this.TButton.Name = "TButton";
-            this.TButton.Size = new System.Drawing.Size(75, 23);
-            this.TButton.TabIndex = 1;
-            this.TButton.Text = "Submit";
-            this.TButton.UseVisualStyleBackColor = true;
-            this.TButton.Click += new System.EventHandler(this.TButton_Click);
             // 
             // domainLabel
             // 
+            this.domainLabel.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.domainLabel.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.domainLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.domainLabel.Location = new System.Drawing.Point(3, 0);
+            this.domainLabel.Location = new System.Drawing.Point(9, 19);
             this.domainLabel.Name = "domainLabel";
-            this.domainLabel.Size = new System.Drawing.Size(82, 23);
+            this.domainLabel.Size = new System.Drawing.Size(122, 40);
             this.domainLabel.TabIndex = 0;
             this.domainLabel.Text = "Enter Domain:";
-            this.domainLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.domainLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // domainTField
             // 
-            this.domainTField.Location = new System.Drawing.Point(111, 3);
+            this.domainTField.BackColor = System.Drawing.Color.Gainsboro;
+            this.domainTField.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.domainTField.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.domainTField.Location = new System.Drawing.Point(137, 28);
             this.domainTField.Name = "domainTField";
-            this.domainTField.Size = new System.Drawing.Size(153, 20);
+            this.domainTField.Size = new System.Drawing.Size(162, 24);
             this.domainTField.TabIndex = 1;
             this.domainTField.KeyDown += new System.Windows.Forms.KeyEventHandler(this.domainTField_KeyDown);
             // 
             // dValue
             // 
-            this.dValue.Location = new System.Drawing.Point(111, 39);
+            this.dValue.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dValue.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.dValue.Location = new System.Drawing.Point(9, 168);
             this.dValue.Name = "dValue";
-            this.dValue.Size = new System.Drawing.Size(153, 23);
+            this.dValue.Size = new System.Drawing.Size(199, 73);
             this.dValue.TabIndex = 2;
             this.dValue.Text = "Domain Name";
-            this.dValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.dValue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // displayOus
             // 
-            this.displayOus.Location = new System.Drawing.Point(405, 35);
+            this.displayOus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.displayOus.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.displayOus.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.displayOus.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.displayOus.Location = new System.Drawing.Point(187, 284);
             this.displayOus.Name = "displayOus";
-            this.displayOus.Size = new System.Drawing.Size(349, 325);
+            this.displayOus.ReadOnly = true;
+            this.displayOus.Size = new System.Drawing.Size(554, 205);
             this.displayOus.TabIndex = 1;
             this.displayOus.Text = "";
             // 
-            // panel1
+            // userSearch
             // 
-            this.panel1.Controls.Add(this.userSearch);
-            this.panel1.Controls.Add(this.userTField);
-            this.panel1.Controls.Add(this.userLabel);
-            this.panel1.Location = new System.Drawing.Point(57, 195);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(280, 154);
-            this.panel1.TabIndex = 2;
-            // 
-            // userLabel
-            // 
-            this.userLabel.Location = new System.Drawing.Point(24, 31);
-            this.userLabel.Name = "userLabel";
-            this.userLabel.Size = new System.Drawing.Size(67, 25);
-            this.userLabel.TabIndex = 0;
-            this.userLabel.Text = "User ";
+            this.userSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(25)))));
+            this.userSearch.FlatAppearance.BorderSize = 0;
+            this.userSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.userSearch.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userSearch.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.userSearch.Location = new System.Drawing.Point(192, 115);
+            this.userSearch.Name = "userSearch";
+            this.userSearch.Size = new System.Drawing.Size(107, 50);
+            this.userSearch.TabIndex = 2;
+            this.userSearch.Text = "Search User";
+            this.userSearch.UseVisualStyleBackColor = false;
+            this.userSearch.Click += new System.EventHandler(this.SearchButton_Click);
             // 
             // userTField
             // 
-            this.userTField.Location = new System.Drawing.Point(97, 31);
+            this.userTField.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userTField.Location = new System.Drawing.Point(137, 67);
             this.userTField.Name = "userTField";
-            this.userTField.Size = new System.Drawing.Size(106, 20);
+            this.userTField.Size = new System.Drawing.Size(162, 24);
             this.userTField.TabIndex = 1;
             // 
-            // userSearch
+            // userLabel
             // 
-            this.userSearch.Location = new System.Drawing.Point(148, 97);
-            this.userSearch.Name = "userSearch";
-            this.userSearch.Size = new System.Drawing.Size(75, 23);
-            this.userSearch.TabIndex = 2;
-            this.userSearch.Text = "Search User";
-            this.userSearch.UseVisualStyleBackColor = true;
-            this.userSearch.Click += new System.EventHandler(this.SearchButton_Click);
+            this.userLabel.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userLabel.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.userLabel.Location = new System.Drawing.Point(9, 59);
+            this.userLabel.Name = "userLabel";
+            this.userLabel.Size = new System.Drawing.Size(119, 41);
+            this.userLabel.TabIndex = 0;
+            this.userLabel.Text = "Enter User :";
+            this.userLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.panel2.Controls.Add(this.panel4);
+            this.panel2.Controls.Add(this.AccountsButton);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(187, 489);
+            this.panel2.TabIndex = 3;
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
+            this.panel4.Location = new System.Drawing.Point(3, 12);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(10, 54);
+            this.panel4.TabIndex = 5;
+            // 
+            // AccountsButton
+            // 
+            this.AccountsButton.FlatAppearance.BorderSize = 0;
+            this.AccountsButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.AccountsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.AccountsButton.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AccountsButton.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.AccountsButton.Location = new System.Drawing.Point(16, 12);
+            this.AccountsButton.Name = "AccountsButton";
+            this.AccountsButton.Size = new System.Drawing.Size(169, 54);
+            this.AccountsButton.TabIndex = 0;
+            this.AccountsButton.Text = "Accounts";
+            this.AccountsButton.UseVisualStyleBackColor = true;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.panel3.Controls.Add(this.userSearch);
+            this.panel3.Controls.Add(this.userTField);
+            this.panel3.Controls.Add(this.dValue);
+            this.panel3.Controls.Add(this.userLabel);
+            this.panel3.Controls.Add(this.domainTField);
+            this.panel3.Controls.Add(this.domainLabel);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(187, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(554, 286);
+            this.panel3.TabIndex = 4;
             // 
             // UIForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(741, 489);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.displayOus);
-            this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "UIForm";
             this.Text = "Form1";
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label domainLabel;
         private System.Windows.Forms.TextBox domainTField;
-        private Button TButton;
         private Label dValue;
         private RichTextBox displayOus;
-        private Panel panel1;
         private Label userLabel;
         private TextBox userTField;
         private Button userSearch;
+        private Panel panel2;
+        private Panel panel4;
+        private Button AccountsButton;
+        private Panel panel3;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 
