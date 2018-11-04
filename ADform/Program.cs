@@ -20,8 +20,8 @@ namespace Scavenger
             //Event Subscriber
             Directory directory = new Directory(gui); 
             //Subscribe
-            gui.TButtonClicked += directory.CallGetOrgsUnits;
-            gui.SearchButtonClicked += directory.CallGetOrgsUnits;
+            //gui.TButtonClicked += directory.CallGetOrgsUnits;
+            //gui.SearchButtonClicked += directory.CallGetOrgsUnits;
             gui.SearchButtonClicked += directory.DisplayUserResult;
             Application.Run(gui);
 

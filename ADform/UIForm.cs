@@ -59,8 +59,15 @@ namespace Scavenger
    
         private void SearchButton_Click(object sender, EventArgs e)
         {
-            dValue.Text = "You entered:" + domainField;
-            OnSearchButtonClicked();
+            if (string.IsNullOrEmpty(domainField) != false)
+            {
+                dValue.Show();
+            }
+            else
+            {
+                dValue.Hide();
+                OnSearchButtonClicked();
+            }
         }
 
         protected virtual void OnSearchButtonClicked()
@@ -93,6 +100,6 @@ namespace Scavenger
             set { userTField.Text = value; }
 
         }
-
+      
     }
 }
