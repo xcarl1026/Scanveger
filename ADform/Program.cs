@@ -11,6 +11,7 @@ namespace Scavenger
 {
     static class Program
     {
+        [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();

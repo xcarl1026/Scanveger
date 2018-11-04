@@ -22,6 +22,54 @@ namespace Scavenger
         public UIForm()
         {
             InitializeComponent();
+            menuStrip1.Renderer = new MyRenderer();
+        }
+
+        private class MyRenderer : ToolStripProfessionalRenderer
+        {
+            public MyRenderer() : base(new MyColors()) { }
+        }
+
+        private class MyColors : ProfessionalColorTable
+        {
+            Color black = Color.FromArgb(25, 25, 25);
+            public override Color MenuItemSelected
+            {
+                get { return black; }
+            }
+            public override Color MenuItemSelectedGradientBegin
+            {
+                get { return black; }
+            }
+            public override Color MenuItemSelectedGradientEnd
+            {
+                get { return black; }
+            }
+
+           /* public override Color ButtonSelectedBorder
+            {
+                get { return black; }
+            }
+            public override Color ButtonSelectedGradientBegin
+            {
+                get { return black; }
+            }
+            public override Color ButtonSelectedGradientEnd
+            {
+                get { return black; }
+            }*/
+           /* public override Color MenuItemBorder
+            {
+                get { return black; }
+            }*/
+            public override Color MenuItemPressedGradientBegin
+            {
+                get { return black; }
+            }
+            public override Color MenuItemPressedGradientEnd
+            {
+                get { return black; }
+            }
         }
 
         //Handles Submit button clicked
@@ -100,6 +148,21 @@ namespace Scavenger
             set { userTField.Text = value; }
 
         }
-      
+
+        public Label ldapLabel
+        {
+            get { return ldapStatus; }
+            set { ldapStatus = value; }
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            /*FolderBrowserDialog fbd = new FolderBrowserDialog();
+            if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                MessageBox.Show("test");
+            }*/
+            saveFileDialog1.ShowDialog();
+        }
     }
 }

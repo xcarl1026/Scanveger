@@ -24,24 +24,25 @@ namespace Scavenger
 
         public void DisplayUserResult(object sender, EventArgs e)
         {
+            form.OUTextBox = null;
             if (IsLdapOk() != false)
             {
                 SearchResult result = GetUser();
                 if (result != null)
-                {
-                    //ResultPropertyCollection fields = result.Properties;
-                    DirectoryEntry user = result.GetDirectoryEntry();
-                    //form.OUTextBox = user.Properties["sn"].Value.ToString();
-                    form.OUTextBox += user.Properties["samaccountname"].Value.ToString();
+                {                  
+                    DirectoryEntry user = result.GetDirectoryEntry();                  
+                    form.OUTextBox = "Username: " + user.Properties["samaccountname"].Value.ToString() + Environment.NewLine;
+                    form.OUTextBox += "Display Name: " + user.Properties["displayname"].Value.ToString();
                     for (int counter = 0; counter < user.Properties["memberof"].Count; counter++)
                     {
-                        form.OUTextBox += Environment.NewLine + user.Properties["memberof"][counter].ToString()/*.Split(',')*/; //+ Environment.NewLine + form.OUTextBox;
+                        form.OUTextBox += Environment.NewLine + user.Properties["memberof"][counter].ToString()/*.Split(',')*/;
 
                     }
                 }
             }
-
-            /** foreach(string propField in fields.PropertyNames)
+            /**ResultPropertyCollection fields = result.Properties;
+            form.OUTextBox = user.Properties["sn"].Value.ToString();
+            foreach(string propField in fields.PropertyNames)
             {
                 foreach(Object name in fields[propField])
                 {
@@ -49,18 +50,20 @@ namespace Scavenger
                 }
             }*/
         }
-       /** public void CallGetOrgsUnits(object sender, EventArgs e)
-        {
-            if(IsLdapOk() == true)
-            {
-                lOrgUnits = GetOrgUnits();
-                form.OUTextBox = String.Join(Environment.NewLine, lOrgUnits);
-            }
-            //lOrgUnits = getOrgUnits();
-            //form.OUTextBox = String.Join(Environment.NewLine, lOrgUnits);
 
-        }*/
-        
+
+        /** public void CallGetOrgsUnits(object sender, EventArgs e)
+         {
+             if(IsLdapOk() == true)
+             {
+                 lOrgUnits = GetOrgUnits();
+                 form.OUTextBox = String.Join(Environment.NewLine, lOrgUnits);
+             }
+             //lOrgUnits = getOrgUnits();
+             //form.OUTextBox = String.Join(Environment.NewLine, lOrgUnits);
+
+         }*/
+
         // This function requires Imports System.Net and Imports System.DirectoryServices.Protocols
         bool IsLdapOk()
         {
@@ -76,13 +79,13 @@ namespace Scavenger
                     ldapConnection.AutoBind = false;*/
                     ldapConnection.Timeout = mytimeout;
                     ldapConnection.Bind();
-                    form.OUTextBox = "Successfully authenticated to LDAP server " + ldapServer;
+                    form.ldapLabel.ForeColor = System.Drawing.Color.FromArgb(40, 135, 25);
                     ldapOK = true;
                     ldapConnection.Dispose();
                 }
                 catch (LdapException e)
                 {
-                    form.OUTextBox = "Looks like I couldn't reach the LDAP server: " + ldapServer + "\n" + e.Message;
+                    form.ldapLabel.ForeColor = System.Drawing.Color.FromArgb(179, 0, 0);
                     ldapOK = false;
                 }
             }
