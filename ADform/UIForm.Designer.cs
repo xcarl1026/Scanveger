@@ -36,7 +36,7 @@ namespace Scavenger
             this.domainLabel = new System.Windows.Forms.Label();
             this.domainTField = new System.Windows.Forms.TextBox();
             this.dValue = new System.Windows.Forms.Label();
-            this.displayOus = new System.Windows.Forms.RichTextBox();
+            this.displayInfo = new System.Windows.Forms.RichTextBox();
             this.userSearch = new System.Windows.Forms.Button();
             this.userTField = new System.Windows.Forms.TextBox();
             this.userLabel = new System.Windows.Forms.Label();
@@ -87,18 +87,18 @@ namespace Scavenger
             this.dValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.dValue.Visible = false;
             // 
-            // displayOus
+            // displayInfo
             // 
-            this.displayOus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.displayOus.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.displayOus.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.displayOus.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.displayOus.Location = new System.Drawing.Point(12, 158);
-            this.displayOus.Name = "displayOus";
-            this.displayOus.ReadOnly = true;
-            this.displayOus.Size = new System.Drawing.Size(355, 203);
-            this.displayOus.TabIndex = 4;
-            this.displayOus.Text = "";
+            this.displayInfo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.displayInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.displayInfo.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.displayInfo.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.displayInfo.Location = new System.Drawing.Point(12, 158);
+            this.displayInfo.Name = "displayInfo";
+            this.displayInfo.ReadOnly = true;
+            this.displayInfo.Size = new System.Drawing.Size(355, 203);
+            this.displayInfo.TabIndex = 4;
+            this.displayInfo.Text = "";
             // 
             // userSearch
             // 
@@ -125,6 +125,7 @@ namespace Scavenger
             this.userTField.Name = "userTField";
             this.userTField.Size = new System.Drawing.Size(162, 24);
             this.userTField.TabIndex = 2;
+            this.userTField.KeyDown += new System.Windows.Forms.KeyEventHandler(this.userTField_KeyDown);
             // 
             // userLabel
             // 
@@ -142,7 +143,7 @@ namespace Scavenger
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.panel3.Controls.Add(this.ldapStatus);
             this.panel3.Controls.Add(this.userSearch);
-            this.panel3.Controls.Add(this.displayOus);
+            this.panel3.Controls.Add(this.displayInfo);
             this.panel3.Controls.Add(this.userTField);
             this.panel3.Controls.Add(this.dValue);
             this.panel3.Controls.Add(this.userLabel);
@@ -158,7 +159,7 @@ namespace Scavenger
             // ldapStatus
             // 
             this.ldapStatus.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ldapStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ldapStatus.ForeColor = System.Drawing.Color.DarkOrange;
             this.ldapStatus.Location = new System.Drawing.Point(317, 0);
             this.ldapStatus.Name = "ldapStatus";
             this.ldapStatus.Size = new System.Drawing.Size(64, 33);
@@ -193,7 +194,7 @@ namespace Scavenger
             this.saveToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.saveToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
@@ -204,9 +205,11 @@ namespace Scavenger
             this.ClientSize = new System.Drawing.Size(381, 373);
             this.Controls.Add(this.panel3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "UIForm";
-            this.Text = "Form1";
+            this.Text = "Scavenger";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UIForm_KeyDown);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
@@ -219,7 +222,7 @@ namespace Scavenger
         private System.Windows.Forms.Label domainLabel;
         private System.Windows.Forms.TextBox domainTField;
         private Label dValue;
-        private RichTextBox displayOus;
+        private RichTextBox displayInfo;
         private Label userLabel;
         private TextBox userTField;
         private Button userSearch;

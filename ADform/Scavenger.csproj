@@ -50,11 +50,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountsControl.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="QuickDialogue.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AccountsControl.Designer.cs">
-      <DependentUpon>AccountsControl.cs</DependentUpon>
+    <Compile Include="QuickDialogue.Designer.cs">
+      <DependentUpon>QuickDialogue.cs</DependentUpon>
     </Compile>
     <Compile Include="UIForm.cs">
       <SubType>Form</SubType>
@@ -66,6 +66,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Directory.cs" />
+    <EmbeddedResource Include="QuickDialogue.resx">
+      <DependentUpon>QuickDialogue.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIForm.resx">
       <DependentUpon>UIForm.cs</DependentUpon>
     </EmbeddedResource>

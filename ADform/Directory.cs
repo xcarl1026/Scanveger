@@ -39,6 +39,14 @@ namespace Scavenger
 
                     }
                 }
+                else
+                {
+
+                    Form quickDialoge = new QuickDialogue();
+                    quickDialoge.StartPosition = FormStartPosition.CenterScreen;
+                    quickDialoge.Show();
+                }
+                
             }
             /**ResultPropertyCollection fields = result.Properties;
             form.OUTextBox = user.Properties["sn"].Value.ToString();
@@ -72,7 +80,7 @@ namespace Scavenger
             if (string.IsNullOrEmpty(ldapServer) == false)
             {
                 LdapConnection ldapConnection = new LdapConnection(new LdapDirectoryIdentifier(ldapServer));
-                TimeSpan mytimeout = new TimeSpan(0, 0, 1);
+                TimeSpan mytimeout = new TimeSpan(0, 0, 3);
                 try
                 {
                     /**ldapConnection.AuthType = AuthType.Negotiate;
@@ -126,7 +134,7 @@ namespace Scavenger
             searcher.PropertiesToLoad.Add("sammaccountname");
             searcher.PropertiesToLoad.Add("sn");
             searcher.PropertiesToLoad.Add("memberof");
-            searcher.Filter = "(|(cn=" + form.userField + ")(samaccountname=" + form.userField + ")(displayname=" + form.userField + "))";
+            searcher.Filter = "(|(cn=" + form.userField + ")(samaccountname=" + form.userField + ")(displayname=" + form.userField + ")(sn=" + form.userField + "))";
             SearchResult result;
 
             try
