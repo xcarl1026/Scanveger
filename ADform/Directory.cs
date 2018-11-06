@@ -33,11 +33,14 @@ namespace Scavenger
                     DirectoryEntry user = result.GetDirectoryEntry();                  
                     form.OUTextBox = "Username: " + user.Properties["samaccountname"].Value.ToString() + Environment.NewLine;
                     form.OUTextBox += "Display Name: " + user.Properties["displayname"].Value.ToString();
+                    
                     for (int counter = 0; counter < user.Properties["memberof"].Count; counter++)
                     {
-                        form.OUTextBox += Environment.NewLine + user.Properties["memberof"][counter].ToString()/*.Split(',')*/;
-
+                        //form.OUTextBox += Environment.NewLine + user.Properties["memberof"][counter].ToString().Split(',');
+                        string[] groups = user.Properties["memberof"][counter].ToString().Split(',');
+                        form.OUTextBox += Environment.NewLine + groups[0];
                     }
+                 
                 }
                 else
                 {

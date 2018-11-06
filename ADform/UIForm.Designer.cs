@@ -33,6 +33,7 @@ namespace Scavenger
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UIForm));
             this.domainLabel = new System.Windows.Forms.Label();
             this.domainTField = new System.Windows.Forms.TextBox();
             this.dValue = new System.Windows.Forms.Label();
@@ -47,6 +48,7 @@ namespace Scavenger
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.ExitButton = new System.Windows.Forms.Button();
             this.panel3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -79,7 +81,7 @@ namespace Scavenger
             // 
             this.dValue.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dValue.ForeColor = System.Drawing.Color.Red;
-            this.dValue.Location = new System.Drawing.Point(178, 52);
+            this.dValue.Location = new System.Drawing.Point(174, 66);
             this.dValue.Name = "dValue";
             this.dValue.Size = new System.Drawing.Size(21, 24);
             this.dValue.TabIndex = 2;
@@ -107,7 +109,7 @@ namespace Scavenger
             this.userSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.userSearch.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userSearch.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.userSearch.Location = new System.Drawing.Point(184, 93);
+            this.userSearch.Location = new System.Drawing.Point(180, 93);
             this.userSearch.Name = "userSearch";
             this.userSearch.Size = new System.Drawing.Size(107, 50);
             this.userSearch.TabIndex = 3;
@@ -141,6 +143,7 @@ namespace Scavenger
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.panel3.Controls.Add(this.ExitButton);
             this.panel3.Controls.Add(this.ldapStatus);
             this.panel3.Controls.Add(this.userSearch);
             this.panel3.Controls.Add(this.displayInfo);
@@ -150,19 +153,18 @@ namespace Scavenger
             this.panel3.Controls.Add(this.domainTField);
             this.panel3.Controls.Add(this.domainLabel);
             this.panel3.Controls.Add(this.menuStrip1);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Location = new System.Drawing.Point(0, -2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(381, 378);
+            this.panel3.Size = new System.Drawing.Size(381, 380);
             this.panel3.TabIndex = 4;
             // 
             // ldapStatus
             // 
             this.ldapStatus.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ldapStatus.ForeColor = System.Drawing.Color.DarkOrange;
-            this.ldapStatus.Location = new System.Drawing.Point(317, 0);
+            this.ldapStatus.Location = new System.Drawing.Point(294, 0);
             this.ldapStatus.Name = "ldapStatus";
-            this.ldapStatus.Size = new System.Drawing.Size(64, 33);
+            this.ldapStatus.Size = new System.Drawing.Size(61, 33);
             this.ldapStatus.TabIndex = 5;
             this.ldapStatus.Text = "LDAP";
             this.ldapStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -178,6 +180,9 @@ namespace Scavenger
             this.menuStrip1.Size = new System.Drawing.Size(381, 33);
             this.menuStrip1.TabIndex = 6;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.menuStrip1_MouseDown);
+            this.menuStrip1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.menuStrip1_MouseMove);
+            this.menuStrip1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.menuStrip1_MouseUp);
             // 
             // fileToolStripMenuItem
             // 
@@ -198,13 +203,27 @@ namespace Scavenger
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
+            // ExitButton
+            // 
+            this.ExitButton.FlatAppearance.BorderSize = 0;
+            this.ExitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ExitButton.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExitButton.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.ExitButton.Image = ((System.Drawing.Image)(resources.GetObject("ExitButton.Image")));
+            this.ExitButton.Location = new System.Drawing.Point(352, 0);
+            this.ExitButton.Name = "ExitButton";
+            this.ExitButton.Size = new System.Drawing.Size(29, 33);
+            this.ExitButton.TabIndex = 7;
+            this.ExitButton.UseVisualStyleBackColor = true;
+            this.ExitButton.Click += new System.EventHandler(this.button1_Click);
+            // 
             // UIForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(381, 373);
             this.Controls.Add(this.panel3);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "UIForm";
@@ -233,6 +252,7 @@ namespace Scavenger
         private ToolStripMenuItem fileToolStripMenuItem;
         private ToolStripMenuItem saveToolStripMenuItem;
         private SaveFileDialog saveFileDialog1;
+        private Button ExitButton;
     }
 }
 

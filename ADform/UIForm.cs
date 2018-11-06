@@ -19,6 +19,8 @@ namespace Scavenger
         //Create Event
         //public event SubmitButtonClickedEventHandler TButtonClicked;
         public event SearchButtonClickedEventHandler SearchButtonClicked;
+        private bool mouseDown;
+        private Point lastLocation;
 
         public UIForm()
         {
@@ -188,5 +190,47 @@ namespace Scavenger
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
+        private void panel3_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseDown = true;
+            lastLocation = e.Location;
+        }
+
+        private void panel3_MouseMove(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void panel3_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouseDown = false;
+        }
+
+        private void menuStrip1_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseDown = true;
+            lastLocation = e.Location;
+        }
+
+        private void menuStrip1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (mouseDown)
+            {
+                this.Location = new Point(
+                    (this.Location.X - lastLocation.X) + e.X, (this.Location.Y - lastLocation.Y) + e.Y);
+
+                this.Update();
+            }
+        }
+
+        private void menuStrip1_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouseDown = false;
+        }
     }
 }
