@@ -232,5 +232,27 @@ namespace Scavenger
         {
             mouseDown = false;
         }
+
+        private void panel3_MouseDown_1(object sender, MouseEventArgs e)
+        {
+            mouseDown = true;
+            lastLocation = e.Location;
+        }
+
+        private void panel3_MouseMove_1(object sender, MouseEventArgs e)
+        {
+            if (mouseDown)
+            {
+                this.Location = new Point(
+                    (this.Location.X - lastLocation.X) + e.X, (this.Location.Y - lastLocation.Y) + e.Y);
+
+                this.Update();
+            }
+        }
+
+        private void panel3_MouseUp_1(object sender, MouseEventArgs e)
+        {
+            mouseDown = false;
+        }
     }
 }
