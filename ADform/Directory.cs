@@ -85,7 +85,6 @@ namespace Scavenger
                     ldapConnection.AutoBind = false;*/
                     ldapConnection.Timeout = mytimeout;
                     ldapConnection.Bind();
-                    form.ldapLabel.ForeColor = System.Drawing.Color.FromArgb(40, 135, 25);
                     ldapOK = true;
                     ldapConnection.Dispose();
                 }
@@ -94,6 +93,10 @@ namespace Scavenger
                     form.ldapLabel.ForeColor = System.Drawing.Color.FromArgb(179, 0, 0);
                     ldapOK = false;
                 }
+            }
+            if(ldapOK == true)
+            {
+                form.ldapLabel.ForeColor = System.Drawing.Color.FromArgb(40, 135, 25);
             }
             return ldapOK;
         }
