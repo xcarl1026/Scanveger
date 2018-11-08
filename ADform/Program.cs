@@ -20,10 +20,9 @@ namespace Scavenger
             UIForm gui = new UIForm();
             //Event Subscriber
             Directory directory = new Directory(gui); 
-            //Subscribe
-            //gui.TButtonClicked += directory.CallGetOrgsUnits;
-            //gui.SearchButtonClicked += directory.CallGetOrgsUnits;
+            //Subscriber
             gui.SearchButtonClicked += directory.DisplayUserResult;
+            gui.SaveButtonClicked += directory.SaveUserSecGroups;
             Application.Run(gui);
 
         }

@@ -16,9 +16,11 @@ namespace Scavenger
     {   //Create Delegate for Event Handler
         //public delegate void SubmitButtonClickedEventHandler(object source, EventArgs args);
         public delegate void SearchButtonClickedEventHandler(object source, EventArgs args);
+        public delegate void SaveButtonClickedEventHandler(object source, EventArgs args);
         //Create Event
         //public event SubmitButtonClickedEventHandler TButtonClicked;
         public event SearchButtonClickedEventHandler SearchButtonClicked;
+        public event SaveButtonClickedEventHandler SaveButtonClicked;
         private bool mouseDown;
         private Point lastLocation;
 
@@ -27,22 +29,6 @@ namespace Scavenger
             InitializeComponent();
             menuStrip1.Renderer = new MyRenderer();
         }
-
-        /**Handles Submit button clicked
-        private void TButton_Click(object sender, EventArgs e)
-        {
-            //domainName = domainTField.Text;
-            //dValue.Text = "You entered:" + domainField;
-            
-            OnTButtonClicked();
-            
-        }*/
-        /** protected virtual void OnTButtonClicked()
-         {
-             //Fire the event - notifying all subscribers
-             if (TButtonClicked != null)
-                 TButtonClicked(this, null);
-         }*/
 
         //Submits text when enter is detected on text box
         private void domainTField_KeyDown(object sender, KeyEventArgs e)
@@ -105,24 +91,21 @@ namespace Scavenger
             }
         }
 
+        protected virtual void OnSaveButtonClicked()
+        {
+            if(SaveButtonClicked != null)
+            {
+                SaveButtonClicked(this, null);
+            }
+        }
+
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             saveFileDialog1.Filter = "Text File (*.txt)|*.txt";
             saveFileDialog1.DefaultExt = ".txt";
             saveFileDialog1.AddExtension = true;
             saveFileDialog1.FileName = "User's groups";
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                using (Stream s = File.Open(saveFileDialog1.FileName, FileMode.Append))
-                using (StreamWriter sw = new StreamWriter(s))
-                {
-                    for (int i = 0; i < displayInfo.Lines.Length; i++)
-                    {
-                        sw.Write(displayInfo.Lines[i] + Environment.NewLine);
-                    }
-
-                }
-            }
+            OnSaveButtonClicked();
         }
 
         //Sets/Gets 
@@ -149,6 +132,12 @@ namespace Scavenger
         {
             get { return ldapStatus; }
             set { ldapStatus = value; }
+        }
+
+        public SaveFileDialog saveDialog
+        {
+            get { return saveFileDialog1; }
+            set { saveFileDialog1 = value; }
         }
 
         private class MyRenderer : ToolStripProfessionalRenderer

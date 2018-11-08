@@ -17,6 +17,8 @@ namespace Scavenger
 
        Label ldapLabel { get; set; }
        
+       SaveFileDialog saveDialog { get; set; }
+       
 
      
     }

@@ -8,72 +8,67 @@ using System.Security;
 using System.Runtime.InteropServices;
 using System.DirectoryServices.Protocols;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Scavenger
 {
     public class Directory
     {   
-        //Declare IUIForm to use interface
         private readonly IUIForm form;
-        //private List<string> lOrgUnits;
-
         public Directory(IUIForm form)
         {
+            
             this.form = form;           
         }
 
         public void DisplayUserResult(object sender, EventArgs e)
         {
-            form.OUTextBox = null;
+            form.OUTextBox = ProcesUserGroups();
+        }
+
+        private string ProcesUserGroups()
+        {
+            string secGroupList = String.Empty;
+            var builder = new StringBuilder();
             if (IsLdapOk() != false)
             {
                 SearchResult result = GetUser();
                 if (result != null)
-                {                  
-                    DirectoryEntry user = result.GetDirectoryEntry();                  
-                    form.OUTextBox = "Username: " + user.Properties["samaccountname"].Value.ToString() + Environment.NewLine;
-                    form.OUTextBox += "Display Name: " + user.Properties["displayname"].Value.ToString();
-                    
+                {
+                    DirectoryEntry user = result.GetDirectoryEntry();
+  
+                    builder.Append("Username: ");
+                    builder.Append(user.Properties["samaccountname"].Value.ToString());
+                    builder.Append(Environment.NewLine);
+                    builder.Append("Display Name: ");
+                    builder.Append(user.Properties["displayname"].Value.ToString());
+                    builder.Append(Environment.NewLine);
+
                     for (int counter = 0; counter < user.Properties["memberof"].Count; counter++)
                     {
-                        //form.OUTextBox += Environment.NewLine + user.Properties["memberof"][counter].ToString().Split(',');
                         string[] groups = user.Properties["memberof"][counter].ToString().Split(',');
-                        form.OUTextBox += Environment.NewLine + groups[0];
+                        builder.Append(groups[0]);
+                        builder.Append(Environment.NewLine);
                     }
-                 
+                    secGroupList = builder.ToString();
                 }
-                else
-                {
-
-                    Form quickDialoge = new QuickDialogue();
-                    quickDialoge.StartPosition = FormStartPosition.CenterScreen;
-                    quickDialoge.Show();
-                }
-                
             }
-            /**ResultPropertyCollection fields = result.Properties;
-            form.OUTextBox = user.Properties["sn"].Value.ToString();
-            foreach(string propField in fields.PropertyNames)
-            {
-                foreach(Object name in fields[propField])
-                {
-                    form.OUTextBox = propField + " : " + name + Environment.NewLine + form.OUTextBox;
-                }
-            }*/
+            return secGroupList;
         }
 
-
-        /** public void CallGetOrgsUnits(object sender, EventArgs e)
-         {
-             if(IsLdapOk() == true)
+        public void SaveUserSecGroups(object source, EventArgs e)
+        {
+          string secGroupList = ProcesUserGroups();
+          SaveFileDialog saveDialog = form.saveDialog;
+          if (saveDialog.ShowDialog() == DialogResult.OK)
+          {
+             using (Stream s = File.Open(saveDialog.FileName, FileMode.Append))
+             using (StreamWriter sw = new StreamWriter(s))
              {
-                 lOrgUnits = GetOrgUnits();
-                 form.OUTextBox = String.Join(Environment.NewLine, lOrgUnits);
+                   sw.Write(secGroupList);
              }
-             //lOrgUnits = getOrgUnits();
-             //form.OUTextBox = String.Join(Environment.NewLine, lOrgUnits);
-
-         }*/
+          }
+        }
 
         // This function requires Imports System.Net and Imports System.DirectoryServices.Protocols
         bool IsLdapOk()
@@ -148,8 +143,14 @@ namespace Scavenger
             {
                 result = null;
             }
+            if(result == null)
+            {
+                Form quickDialoge = new QuickDialogue();
+                quickDialoge.StartPosition = FormStartPosition.CenterScreen;
+                quickDialoge.Show();
+            }
+
             searcher.Dispose();
-            
             ldapConnection.Dispose(); 
             return result;
         }
