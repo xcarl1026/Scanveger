@@ -15,6 +15,7 @@ namespace Scavenger
     public class Directory
     {   
         private readonly IUIForm form;
+        string resultOutput = String.Empty;
         public Directory(IUIForm form)
         {
             
@@ -23,49 +24,67 @@ namespace Scavenger
 
         public void DisplayUserResult(object sender, EventArgs e)
         {
-            form.OUTextBox = ProcesUserGroups();
+            resultOutput = FormatList(ProcesUserGroups(form.userField));
+            form.OUTextBox = resultOutput;
         }
 
-        private string ProcesUserGroups()
+        public User ProcesUserGroups(string userName)
         {
-            string secGroupList = String.Empty;
-            var builder = new StringBuilder();
+            List<string> userSecGroups = new List<string>();
+            User user = new User();
             if (IsLdapOk() != false)
             {
-                SearchResult result = GetUser();
+                SearchResult result = GetUser(userName);
                 if (result != null)
                 {
-                    DirectoryEntry user = result.GetDirectoryEntry();
-  
-                    builder.Append("Username: ");
-                    builder.Append(user.Properties["samaccountname"].Value.ToString());
-                    builder.Append(Environment.NewLine);
-                    builder.Append("Display Name: ");
-                    builder.Append(user.Properties["displayname"].Value.ToString());
-                    builder.Append(Environment.NewLine);
+                    
+                    DirectoryEntry userObject = result.GetDirectoryEntry();
+                    user.UserName = userObject.Properties["samaccountname"].Value.ToString();
+                    user.UserDisplayName = userObject.Properties["displayname"].Value.ToString();
+                    //userSecGroups.Add("Username: " + user.Properties["samaccountname"].Value.ToString());
+                    //userSecGroups.Add("Display Name: " + user.Properties["displayname"].Value.ToString());
 
-                    for (int counter = 0; counter < user.Properties["memberof"].Count; counter++)
+                    for (int counter = 0; counter < userObject.Properties["memberof"].Count; counter++)
                     {
-                        string[] groups = user.Properties["memberof"][counter].ToString().Split(',');
-                        builder.Append(groups[0]);
-                        builder.Append(Environment.NewLine);
+                        userSecGroups.Add(userObject.Properties["memberof"][counter].ToString());
+                      
                     }
-                    secGroupList = builder.ToString();
+                    userSecGroups.Sort();
+                    user.UserSecGroups = userSecGroups;
                 }
             }
-            return secGroupList;
+            return user;
+        }
+
+        public string FormatList(User user)
+        {
+            //string[] userSecGroupArray = new string[userSecGroups.Count];
+            string formattedString = String.Empty;
+            var builder = new StringBuilder();
+            builder.Append("Username: " + user.UserName);
+            builder.Append(Environment.NewLine);
+            builder.Append("Display Name: " + user.UserDisplayName);
+            builder.Append(Environment.NewLine);
+            for (int i = 0; i < user.UserSecGroups.Count(); i++)
+            {
+                string[] trimPath = user.UserSecGroups[i].Split(',');
+                builder.Append(trimPath[0].Substring(3));
+                builder.Append(Environment.NewLine);
+            }
+            formattedString = builder.ToString();
+            
+            return formattedString;
         }
 
         public void SaveUserSecGroups(object source, EventArgs e)
         {
-          string secGroupList = ProcesUserGroups();
           SaveFileDialog saveDialog = form.saveDialog;
           if (saveDialog.ShowDialog() == DialogResult.OK)
           {
              using (Stream s = File.Open(saveDialog.FileName, FileMode.Append))
              using (StreamWriter sw = new StreamWriter(s))
              {
-                   sw.Write(secGroupList);
+                   sw.Write(resultOutput);
              }
           }
         }
@@ -127,7 +146,7 @@ namespace Scavenger
             return orgUnits;
         }*/
 
-        private SearchResult GetUser()
+        private SearchResult GetUser(string user)
         {
             DirectoryEntry ldapConnection = GetLdapConnection();
             DirectorySearcher searcher = new DirectorySearcher(ldapConnection);
@@ -135,7 +154,7 @@ namespace Scavenger
             searcher.PropertiesToLoad.Add("sammaccountname");
             searcher.PropertiesToLoad.Add("sn");
             searcher.PropertiesToLoad.Add("memberof");
-            searcher.Filter = "(|(cn=" + form.userField + ")(samaccountname=" + form.userField + ")(displayname=" + form.userField + ")(sn=" + form.userField + "))";
+            searcher.Filter = "(|(cn=" + user + ")(samaccountname=" + user + ")(displayname=" + user + ")(sn=" + user + "))";
             SearchResult result;
 
             try
@@ -148,9 +167,14 @@ namespace Scavenger
             }
             if(result == null)
             {
-                Form quickDialoge = new QuickDialogue();
-                quickDialoge.StartPosition = FormStartPosition.CenterScreen;
-                quickDialoge.Show();
+                QuickDialogue quickDialogue = new QuickDialogue();
+                quickDialogue.StartPosition = FormStartPosition.CenterScreen;
+                bool checkString = String.IsNullOrEmpty(user);
+                if (checkString == false )
+                {
+                    quickDialogue.SetTextErrorLabel("User " + user + " not found");
+                }
+                quickDialogue.Show();
             }
 
             searcher.Dispose();

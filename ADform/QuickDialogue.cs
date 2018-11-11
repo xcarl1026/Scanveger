@@ -15,11 +15,17 @@ namespace Scavenger
         public QuickDialogue()
         {
             InitializeComponent();
+           
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        public void SetTextErrorLabel(string user)
+        {
+            this.errorLabel.Text = user;
         }
     }
 }
