@@ -78,6 +78,7 @@ namespace Scavenger
             {
                 dValue.Hide();
                 OnSearchButtonClicked();
+                //compareWindowcs1.Visible = true;
             }
 
         }

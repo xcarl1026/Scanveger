@@ -8,6 +8,12 @@ namespace Scavenger
 {
     public class User
     {
+        public User()
+        {
+            UserName = String.Empty;
+            UserDisplayName = String.Empty;
+            UserSecGroups = new List<string>();
+        }
         public string UserName { get; set; }
 
         public string UserDisplayName { get; set; }

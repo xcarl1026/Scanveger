@@ -41,8 +41,6 @@ namespace Scavenger
                     DirectoryEntry userObject = result.GetDirectoryEntry();
                     user.UserName = userObject.Properties["samaccountname"].Value.ToString();
                     user.UserDisplayName = userObject.Properties["displayname"].Value.ToString();
-                    //userSecGroups.Add("Username: " + user.Properties["samaccountname"].Value.ToString());
-                    //userSecGroups.Add("Display Name: " + user.Properties["displayname"].Value.ToString());
 
                     for (int counter = 0; counter < userObject.Properties["memberof"].Count; counter++)
                     {
@@ -58,21 +56,23 @@ namespace Scavenger
 
         public string FormatList(User user)
         {
-            //string[] userSecGroupArray = new string[userSecGroups.Count];
             string formattedString = String.Empty;
-            var builder = new StringBuilder();
-            builder.Append("Username: " + user.UserName);
-            builder.Append(Environment.NewLine);
-            builder.Append("Display Name: " + user.UserDisplayName);
-            builder.Append(Environment.NewLine);
-            for (int i = 0; i < user.UserSecGroups.Count(); i++)
-            {
-                string[] trimPath = user.UserSecGroups[i].Split(',');
-                builder.Append(trimPath[0].Substring(3));
+            if (!String.IsNullOrEmpty(user.UserDisplayName))
+            { 
+                var builder = new StringBuilder();
+                builder.Append("Username: " + user.UserName);
                 builder.Append(Environment.NewLine);
+                builder.Append("Display Name: " + user.UserDisplayName);
+                builder.Append(Environment.NewLine);
+                for (int i = 0; i < user.UserSecGroups.Count(); i++)
+                {
+                    string[] trimPath = user.UserSecGroups[i].Split(',');
+                    builder.Append(trimPath[0].Substring(3));
+                    builder.Append(Environment.NewLine);
+                }
+                formattedString = builder.ToString();
             }
-            formattedString = builder.ToString();
-            
+  
             return formattedString;
         }
 
