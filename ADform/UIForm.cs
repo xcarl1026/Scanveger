@@ -23,6 +23,7 @@ namespace Scavenger
         public event SaveButtonClickedEventHandler SaveButtonClicked;
         private bool mouseDown;
         private Point lastLocation;
+        private CompareWindowcs compare = new CompareWindowcs();
 
         public UIForm()
         {
@@ -243,6 +244,33 @@ namespace Scavenger
         private void panel3_MouseUp_1(object sender, MouseEventArgs e)
         {
             mouseDown = false;
+        }
+
+        private void compareButton_MouseClick(object sender, MouseEventArgs e)
+        {
+           
+            if (this.panel1.Visible == false)
+             {
+                
+                this.panel1.Controls.Add(compare);
+                this.panel1.Visible = true;
+              
+
+             }
+             else
+             {
+                this.panel1.Visible = false;
+                //this.panel1.Width = 0;
+                this.panel3.Size = this.panel3.MinimumSize;
+                //this.Width = 508;
+
+            }
+
+
+            //compare.Location = new System.Drawing.Point(370, 0);
+            //this.panel3.Width += compare.Width;
+            //compare.Dock = DockStyle.Right;             
+
         }
     }
 }

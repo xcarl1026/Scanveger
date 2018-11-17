@@ -30,22 +30,24 @@
         {
             this.panelCompare = new System.Windows.Forms.Panel();
             this.userSearch2 = new System.Windows.Forms.Button();
-            this.displayInfo = new System.Windows.Forms.RichTextBox();
             this.userTField2 = new System.Windows.Forms.TextBox();
             this.userLabel2 = new System.Windows.Forms.Label();
+            this.displayInfo = new System.Windows.Forms.RichTextBox();
             this.panelCompare.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelCompare
             // 
+            this.panelCompare.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.panelCompare.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.panelCompare.Controls.Add(this.userSearch2);
             this.panelCompare.Controls.Add(this.userTField2);
             this.panelCompare.Controls.Add(this.userLabel2);
             this.panelCompare.Controls.Add(this.displayInfo);
             this.panelCompare.Location = new System.Drawing.Point(0, 0);
+            this.panelCompare.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panelCompare.Name = "panelCompare";
-            this.panelCompare.Size = new System.Drawing.Size(381, 291);
+            this.panelCompare.Size = new System.Drawing.Size(508, 459);
             this.panelCompare.TabIndex = 5;
             // 
             // userSearch2
@@ -55,25 +57,13 @@
             this.userSearch2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.userSearch2.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userSearch2.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.userSearch2.Location = new System.Drawing.Point(260, 18);
+            this.userSearch2.Location = new System.Drawing.Point(346, 124);
+            this.userSearch2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.userSearch2.Name = "userSearch2";
-            this.userSearch2.Size = new System.Drawing.Size(107, 50);
+            this.userSearch2.Size = new System.Drawing.Size(143, 62);
             this.userSearch2.TabIndex = 3;
             this.userSearch2.Text = "Search User";
             this.userSearch2.UseVisualStyleBackColor = false;
-            // 
-            // displayInfo
-            // 
-            this.displayInfo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.displayInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.displayInfo.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.displayInfo.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.displayInfo.Location = new System.Drawing.Point(12, 74);
-            this.displayInfo.Name = "displayInfo";
-            this.displayInfo.ReadOnly = true;
-            this.displayInfo.Size = new System.Drawing.Size(355, 203);
-            this.displayInfo.TabIndex = 4;
-            this.displayInfo.Text = "";
             // 
             // userTField2
             // 
@@ -81,29 +71,46 @@
             this.userTField2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.userTField2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userTField2.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.userTField2.Location = new System.Drawing.Point(12, 44);
+            this.userTField2.Location = new System.Drawing.Point(16, 146);
+            this.userTField2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.userTField2.Name = "userTField2";
-            this.userTField2.Size = new System.Drawing.Size(162, 24);
+            this.userTField2.Size = new System.Drawing.Size(215, 29);
             this.userTField2.TabIndex = 2;
             // 
             // userLabel2
             // 
             this.userLabel2.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userLabel2.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.userLabel2.Location = new System.Drawing.Point(8, 16);
+            this.userLabel2.Location = new System.Drawing.Point(16, 112);
+            this.userLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.userLabel2.Name = "userLabel2";
-            this.userLabel2.Size = new System.Drawing.Size(84, 25);
+            this.userLabel2.Size = new System.Drawing.Size(112, 31);
             this.userLabel2.TabIndex = 0;
             this.userLabel2.Text = "User 2";
             this.userLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // displayInfo
+            // 
+            this.displayInfo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.displayInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.displayInfo.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.displayInfo.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.displayInfo.Location = new System.Drawing.Point(16, 194);
+            this.displayInfo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.displayInfo.Name = "displayInfo";
+            this.displayInfo.ReadOnly = true;
+            this.displayInfo.Size = new System.Drawing.Size(473, 250);
+            this.displayInfo.TabIndex = 4;
+            this.displayInfo.Text = "";
+            // 
             // CompareWindowcs
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panelCompare);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "CompareWindowcs";
-            this.Size = new System.Drawing.Size(381, 291);
+            this.Size = new System.Drawing.Size(508, 459);
             this.panelCompare.ResumeLayout(false);
             this.panelCompare.PerformLayout();
             this.ResumeLayout(false);
