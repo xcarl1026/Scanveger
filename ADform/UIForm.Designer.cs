@@ -44,13 +44,13 @@ namespace Scavenger
             this.panel3 = new System.Windows.Forms.Panel();
             this.ExitButton = new System.Windows.Forms.Button();
             this.ldapStatus = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.compareButton = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.compareButton = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.panel3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -75,7 +75,7 @@ namespace Scavenger
             this.domainTField.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.domainTField.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.domainTField.Location = new System.Drawing.Point(16, 79);
-            this.domainTField.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.domainTField.Margin = new System.Windows.Forms.Padding(4);
             this.domainTField.Name = "domainTField";
             this.domainTField.Size = new System.Drawing.Size(215, 29);
             this.domainTField.TabIndex = 1;
@@ -101,7 +101,7 @@ namespace Scavenger
             this.displayInfo.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.displayInfo.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.displayInfo.Location = new System.Drawing.Point(16, 194);
-            this.displayInfo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.displayInfo.Margin = new System.Windows.Forms.Padding(4);
             this.displayInfo.Name = "displayInfo";
             this.displayInfo.ReadOnly = true;
             this.displayInfo.Size = new System.Drawing.Size(473, 250);
@@ -116,7 +116,7 @@ namespace Scavenger
             this.userSearch.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userSearch.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.userSearch.Location = new System.Drawing.Point(240, 114);
-            this.userSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.userSearch.Margin = new System.Windows.Forms.Padding(4);
             this.userSearch.Name = "userSearch";
             this.userSearch.Size = new System.Drawing.Size(143, 62);
             this.userSearch.TabIndex = 3;
@@ -131,7 +131,7 @@ namespace Scavenger
             this.userTField.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userTField.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.userTField.Location = new System.Drawing.Point(16, 146);
-            this.userTField.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.userTField.Margin = new System.Windows.Forms.Padding(4);
             this.userTField.Name = "userTField";
             this.userTField.Size = new System.Drawing.Size(215, 29);
             this.userTField.TabIndex = 2;
@@ -168,7 +168,7 @@ namespace Scavenger
             this.panel3.Controls.Add(this.menuStrip1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.MinimumSize = new System.Drawing.Size(508, 459);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(508, 459);
@@ -186,7 +186,7 @@ namespace Scavenger
             this.ExitButton.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.ExitButton.Image = ((System.Drawing.Image)(resources.GetObject("ExitButton.Image")));
             this.ExitButton.Location = new System.Drawing.Point(469, 0);
-            this.ExitButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ExitButton.Margin = new System.Windows.Forms.Padding(4);
             this.ExitButton.Name = "ExitButton";
             this.ExitButton.Size = new System.Drawing.Size(39, 41);
             this.ExitButton.TabIndex = 7;
@@ -205,6 +205,31 @@ namespace Scavenger
             this.ldapStatus.TabIndex = 5;
             this.ldapStatus.Text = "LDAP";
             this.ldapStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel1
+            // 
+            this.panel1.AutoSize = true;
+            this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel1.Location = new System.Drawing.Point(496, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(0, 0);
+            this.panel1.TabIndex = 8;
+            this.panel1.Visible = false;
+            // 
+            // compareButton
+            // 
+            this.compareButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(15)))), ((int)(((byte)(26)))));
+            this.compareButton.FlatAppearance.BorderSize = 0;
+            this.compareButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.compareButton.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.compareButton.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.compareButton.Location = new System.Drawing.Point(263, 9);
+            this.compareButton.Name = "compareButton";
+            this.compareButton.Size = new System.Drawing.Size(122, 35);
+            this.compareButton.TabIndex = 5;
+            this.compareButton.Text = "Compare";
+            this.compareButton.UseVisualStyleBackColor = false;
+            this.compareButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.compareButton_MouseClick);
             // 
             // menuStrip1
             // 
@@ -242,26 +267,6 @@ namespace Scavenger
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
-            // compareButton
-            // 
-            this.compareButton.Location = new System.Drawing.Point(380, 45);
-            this.compareButton.Name = "compareButton";
-            this.compareButton.Size = new System.Drawing.Size(93, 32);
-            this.compareButton.TabIndex = 5;
-            this.compareButton.Text = "Compare";
-            this.compareButton.UseVisualStyleBackColor = true;
-            this.compareButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.compareButton_MouseClick);
-            // 
-            // panel1
-            // 
-            this.panel1.AutoSize = true;
-            this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panel1.Location = new System.Drawing.Point(496, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(0, 0);
-            this.panel1.TabIndex = 8;
-            this.panel1.Visible = false;
-            // 
             // UIForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -273,7 +278,7 @@ namespace Scavenger
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = new System.Drawing.Size(508, 459);
             this.Name = "UIForm";
             this.Text = "Scavenger";

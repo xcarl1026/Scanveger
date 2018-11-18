@@ -254,14 +254,19 @@ namespace Scavenger
                 
                 this.panel1.Controls.Add(compare);
                 this.panel1.Visible = true;
-              
+                // compareButton.BackColor = Color.FromArgb(76, 10, 18);
+                this.userSearch.Visible = false;
+
+
 
              }
              else
              {
                 this.panel1.Visible = false;
+                //compareButton.BackColor = Color.FromArgb(88, 25, 8);
                 //this.panel1.Width = 0;
                 this.panel3.Size = this.panel3.MinimumSize;
+                this.userSearch.Visible = true;
                 //this.Width = 508;
 
             }
