@@ -154,10 +154,10 @@ namespace Scavenger
             this.panel3.AutoSize = true;
             this.panel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.panel3.Controls.Add(this.compareButton);
             this.panel3.Controls.Add(this.ExitButton);
             this.panel3.Controls.Add(this.ldapStatus);
             this.panel3.Controls.Add(this.panel1);
-            this.panel3.Controls.Add(this.compareButton);
             this.panel3.Controls.Add(this.userSearch);
             this.panel3.Controls.Add(this.displayInfo);
             this.panel3.Controls.Add(this.userTField);
@@ -185,10 +185,10 @@ namespace Scavenger
             this.ExitButton.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ExitButton.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.ExitButton.Image = ((System.Drawing.Image)(resources.GetObject("ExitButton.Image")));
-            this.ExitButton.Location = new System.Drawing.Point(469, 0);
+            this.ExitButton.Location = new System.Drawing.Point(470, 0);
             this.ExitButton.Margin = new System.Windows.Forms.Padding(4);
             this.ExitButton.Name = "ExitButton";
-            this.ExitButton.Size = new System.Drawing.Size(39, 41);
+            this.ExitButton.Size = new System.Drawing.Size(38, 41);
             this.ExitButton.TabIndex = 7;
             this.ExitButton.UseVisualStyleBackColor = true;
             this.ExitButton.Click += new System.EventHandler(this.button1_Click);
@@ -196,12 +196,13 @@ namespace Scavenger
             // ldapStatus
             // 
             this.ldapStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ldapStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.ldapStatus.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ldapStatus.ForeColor = System.Drawing.Color.DarkOrange;
-            this.ldapStatus.Location = new System.Drawing.Point(392, 0);
+            this.ldapStatus.Location = new System.Drawing.Point(396, 0);
             this.ldapStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ldapStatus.Name = "ldapStatus";
-            this.ldapStatus.Size = new System.Drawing.Size(81, 41);
+            this.ldapStatus.Size = new System.Drawing.Size(71, 41);
             this.ldapStatus.TabIndex = 5;
             this.ldapStatus.Text = "LDAP";
             this.ldapStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -218,14 +219,15 @@ namespace Scavenger
             // 
             // compareButton
             // 
+            this.compareButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.compareButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(15)))), ((int)(((byte)(26)))));
             this.compareButton.FlatAppearance.BorderSize = 0;
             this.compareButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.compareButton.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.compareButton.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.compareButton.Location = new System.Drawing.Point(263, 9);
+            this.compareButton.Location = new System.Drawing.Point(263, 0);
             this.compareButton.Name = "compareButton";
-            this.compareButton.Size = new System.Drawing.Size(122, 35);
+            this.compareButton.Size = new System.Drawing.Size(133, 41);
             this.compareButton.TabIndex = 5;
             this.compareButton.Text = "Compare";
             this.compareButton.UseVisualStyleBackColor = false;

@@ -117,6 +117,7 @@ namespace Scavenger
             set { displayInfo.Text = value; }
         }
 
+
         public string domainField
         {
             get { return domainTField.Text; }
@@ -128,6 +129,19 @@ namespace Scavenger
             get { return userTField.Text; }
             set { userTField.Text = value; }
 
+        }
+
+        public string userField2
+        {
+            get { return this.compare.GetUserField2().Text; }
+            set { this.compare.GetUserField2().Text = value; }
+
+        }
+
+        public string OUTextBox2
+        {
+            get { return this.compare.GetOutBox().Text; }
+            set { this.compare.GetOutBox().Text = value;  }
         }
 
         public Label ldapLabel
@@ -256,7 +270,7 @@ namespace Scavenger
                 this.panel1.Visible = true;
                 // compareButton.BackColor = Color.FromArgb(76, 10, 18);
                 this.userSearch.Visible = false;
-
+                
 
 
              }
@@ -269,12 +283,7 @@ namespace Scavenger
                 this.userSearch.Visible = true;
                 //this.Width = 508;
 
-            }
-
-
-            //compare.Location = new System.Drawing.Point(370, 0);
-            //this.panel3.Width += compare.Width;
-            //compare.Dock = DockStyle.Right;             
+            }             
 
         }
     }

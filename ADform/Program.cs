@@ -19,10 +19,14 @@ namespace Scavenger
             //Event Publisher
             UIForm gui = new UIForm();
             //Event Subscriber
-            Directory directory = new Directory(gui); 
+            CompareWindowcs compareWin = new CompareWindowcs();
+            Directory directory = new Directory(gui);
+            Comparison compare = new Comparison(gui);
             //Subscriber
+            compareWin.SearchButton2Clicked += compare.CompareUsers;
             gui.SearchButtonClicked += directory.DisplayUserResult;
             gui.SaveButtonClicked += directory.SaveUserSecGroups;
+            
             Application.Run(gui);
 
         }
