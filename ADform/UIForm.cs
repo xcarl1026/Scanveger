@@ -23,7 +23,8 @@ namespace Scavenger
         public event SaveButtonClickedEventHandler SaveButtonClicked;
         private bool mouseDown;
         private Point lastLocation;
-        private CompareWindowcs compare = new CompareWindowcs();
+        public CompareWindowcs compare = new CompareWindowcs();
+        public CompareResultWin resultWin = new CompareResultWin();
 
         public UIForm()
         {
@@ -148,6 +149,18 @@ namespace Scavenger
         {
             get { return ldapStatus; }
             set { ldapStatus = value; }
+        }
+
+        public string missingGroupLabelText
+        {
+            get { return resultWin.GetMissingGroupLabel().Text; }
+            set { resultWin.GetMissingGroupLabel().Text += value; }
+        }
+
+        public string OUTextBox3
+        {
+            get { return resultWin.GetOutBox().Text; }
+            set { resultWin.GetOutBox().Text = value; }
         }
 
         public SaveFileDialog saveDialog
@@ -277,6 +290,7 @@ namespace Scavenger
              else
              {
                 this.panel1.Visible = false;
+                this.panelResult.Visible = false;
                 //compareButton.BackColor = Color.FromArgb(88, 25, 8);
                 //this.panel1.Width = 0;
                 this.panel3.Size = this.panel3.MinimumSize;
@@ -285,6 +299,12 @@ namespace Scavenger
 
             }             
 
+        }
+
+        public void AddResultPanel(object sender, EventArgs args)
+        {
+            this.panelResult.Visible = true;
+            this.panelResult.Controls.Add(resultWin);
         }
     }
 }

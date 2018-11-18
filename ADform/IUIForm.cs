@@ -12,7 +12,7 @@ namespace Scavenger
        string OUTextBox { get; set; }
 
        string OUTextBox2 { get; set; }
-
+       string OUTextBox3 { get; set; }
        string domainField { get; set; }
 
        string userField { get; set; }
@@ -20,8 +20,10 @@ namespace Scavenger
        string userField2 { get; set; }
 
        Label ldapLabel { get; set; }
-       
-       SaveFileDialog saveDialog { get; set; }
+
+       string missingGroupLabelText { get; set; }
+
+        SaveFileDialog saveDialog { get; set; }
        
 
      
