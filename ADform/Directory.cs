@@ -49,6 +49,7 @@ namespace Scavenger
                     }
                     userSecGroups.Sort();
                     user.UserSecGroups = userSecGroups;
+                    user.Found = true;
                 }
             }
             return user;

@@ -18,19 +18,27 @@ namespace Scavenger
 
         public void CompareUsers(object source, EventArgs args)
         {
+            form.OUTextBox3 = String.Empty;
+            form.missingGroupLabelText = "Missing groups for: ";
             Directory directory = new Directory(form);
             User user1 = directory.ProcesUserGroups(form.userField);
             User user2 = directory.ProcesUserGroups(form.userField2);
             form.OUTextBox = directory.FormatList(user1);
             form.OUTextBox2 = directory.FormatList(user2);
-            var differencesList = user1.UserSecGroups.Except(user2.UserSecGroups);
-            foreach(string line in differencesList)
+            if(user1.Found && user2.Found == true)
             {
-                string[] trimPath = line.Split(',');
-                form.OUTextBox3 += trimPath[0].Substring(3) + Environment.NewLine;
+                var differencesList = user1.UserSecGroups.Except(user2.UserSecGroups);
+                foreach (string line in differencesList)
+                {
+                    string[] trimPath = line.Split(',');
+                    form.OUTextBox3 += trimPath[0].Substring(3) + Environment.NewLine;
+                    form.missingGroupLabelText = "Missing groups for: " + user2.UserDisplayName;
+                }
             }
+            
+            
 
-            form.missingGroupLabelText = user2.UserDisplayName;
+            
 
 
         }

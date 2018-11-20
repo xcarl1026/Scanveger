@@ -154,7 +154,7 @@ namespace Scavenger
         public string missingGroupLabelText
         {
             get { return resultWin.GetMissingGroupLabel().Text; }
-            set { resultWin.GetMissingGroupLabel().Text += value; }
+            set { resultWin.GetMissingGroupLabel().Text = value; }
         }
 
         public string OUTextBox3
