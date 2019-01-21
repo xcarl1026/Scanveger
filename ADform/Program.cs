@@ -25,6 +25,7 @@ namespace Scavenger
   
             gui.SearchButtonClicked += directory.DisplayUserResult;
             gui.SaveButtonClicked += directory.SaveUserSecGroups;
+            gui.SaveButtonClicked2 += comparison.SaveCompareResult;
             gui.compare.SearchButton2Clicked += comparison.CompareUsers;
             gui.compare.SearchButton2Clicked += gui.AddResultPanel;
             Application.Run(gui);

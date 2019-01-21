@@ -21,6 +21,7 @@ namespace Scavenger
         //public event SubmitButtonClickedEventHandler TButtonClicked;
         public event SearchButtonClickedEventHandler SearchButtonClicked;
         public event SaveButtonClickedEventHandler SaveButtonClicked;
+        public event SaveButtonClickedEventHandler SaveButtonClicked2;
         private bool mouseDown;
         private Point lastLocation;
         public CompareWindowcs compare = new CompareWindowcs();
@@ -102,13 +103,29 @@ namespace Scavenger
             }
         }
 
+        protected virtual void OnSaveButtonClicked2()
+        {
+            if (SaveButtonClicked2 != null)
+            {
+                SaveButtonClicked2(this, null);
+            }
+        }
+
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             saveFileDialog1.Filter = "Text File (*.txt)|*.txt";
             saveFileDialog1.DefaultExt = ".txt";
             saveFileDialog1.AddExtension = true;
             saveFileDialog1.FileName = "User's groups";
-            OnSaveButtonClicked();
+            if(this.panel1.Controls.Contains(compare))
+            {
+               OnSaveButtonClicked2();
+            }
+            else
+            {
+                OnSaveButtonClicked();
+            }
+            
         }
 
         //Sets/Gets 
@@ -290,6 +307,7 @@ namespace Scavenger
              else
              {
                 this.panel1.Visible = false;
+                this.panel1.Controls.Remove(compare);
                 this.panelResult.Visible = false;
                 //compareButton.BackColor = Color.FromArgb(88, 25, 8);
                 //this.panel1.Width = 0;
