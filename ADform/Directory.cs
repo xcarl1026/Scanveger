@@ -7,76 +7,116 @@ using System.DirectoryServices;
 using System.Security;
 using System.Runtime.InteropServices;
 using System.DirectoryServices.Protocols;
+using System.Windows.Forms;
+using System.IO;
 
 namespace Scavenger
 {
     public class Directory
     {   
-        //Declare IUIForm to use interface
         private readonly IUIForm form;
-        private List<string> lOrgUnits;
-
+        string resultOutput = String.Empty;
         public Directory(IUIForm form)
         {
+            
             this.form = form;           
         }
 
         public void DisplayUserResult(object sender, EventArgs e)
         {
-            form.OUTextBox = null;
-            SearchResult result = GetUser();
-            //ResultPropertyCollection fields = result.Properties;
-            DirectoryEntry user = result.GetDirectoryEntry();
-            //form.OUTextBox = user.Properties["sn"].Value.ToString();
-            form.OUTextBox = user.Properties["samaccountname"].Value.ToString();
-            for (int counter = 0; counter < user.Properties["memberof"].Count; counter++)
-            {
-                form.OUTextBox += Environment.NewLine + user.Properties["memberof"][counter].ToString()/*.Split(',')*/; //+ Environment.NewLine + form.OUTextBox;
-
-            }
-
-            /* foreach(string propField in fields.PropertyNames)
-            {
-                foreach(Object name in fields[propField])
-                {
-                    form.OUTextBox = propField + " : " + name + Environment.NewLine + form.OUTextBox;
-                }
-            }*/
+            resultOutput = FormatList(ProcesUserGroups(form.userField));
+            form.OUTextBox = resultOutput;
         }
-        public void CallGetOrgsUnits(object sender, EventArgs e)
+
+        public User ProcesUserGroups(string userName)
         {
-            if(IsLdapOk() == true)
+            List<string> userSecGroups = new List<string>();
+            User user = new User();
+            if (IsLdapOk() != false)
             {
-                lOrgUnits = GetOrgUnits();
-                form.OUTextBox = String.Join(Environment.NewLine, lOrgUnits);
-            }
-            //lOrgUnits = getOrgUnits();
-            //form.OUTextBox = String.Join(Environment.NewLine, lOrgUnits);
+                SearchResult result = GetUser(userName);
+                if (result != null)
+                {
+                    
+                    DirectoryEntry userObject = result.GetDirectoryEntry();
+                    user.UserName = userObject.Properties["samaccountname"].Value.ToString();
+                    user.UserDisplayName = userObject.Properties["displayname"].Value.ToString();
 
+                    for (int counter = 0; counter < userObject.Properties["memberof"].Count; counter++)
+                    {
+                        userSecGroups.Add(userObject.Properties["memberof"][counter].ToString());
+                      
+                    }
+                    userSecGroups.Sort();
+                    user.UserSecGroups = userSecGroups;
+                    user.Found = true;
+                }
+            }
+            return user;
         }
 
+        public string FormatList(User user)
+        {
+            string formattedString = String.Empty;
+            if (!String.IsNullOrEmpty(user.UserDisplayName))
+            { 
+                var builder = new StringBuilder();
+                builder.Append("Username: " + user.UserName);
+                builder.Append(Environment.NewLine);
+                builder.Append("Display Name: " + user.UserDisplayName);
+                builder.Append(Environment.NewLine);
+                for (int i = 0; i < user.UserSecGroups.Count(); i++)
+                {
+                    string[] trimPath = user.UserSecGroups[i].Split(',');
+                    builder.Append(trimPath[0].Substring(3));
+                    builder.Append(Environment.NewLine);
+                }
+                formattedString = builder.ToString();
+            }
+  
+            return formattedString;
+        }
+
+        public void SaveUserSecGroups(object source, EventArgs e)
+        {
+          SaveFileDialog saveDialog = form.saveDialog;
+          if (saveDialog.ShowDialog() == DialogResult.OK)
+          {
+             using (Stream s = File.Open(saveDialog.FileName, FileMode.Append))
+             using (StreamWriter sw = new StreamWriter(s))
+             {
+                   sw.Write(resultOutput);
+             }
+          }
+        }
+
+        // This function requires Imports System.Net and Imports System.DirectoryServices.Protocols
         bool IsLdapOk()
         {
             string ldapServer = form.domainField;
-            // This function requires Imports System.Net and Imports System.DirectoryServices.Protocols
-            LdapConnection ldapConnection = new LdapConnection(new LdapDirectoryIdentifier(ldapServer));
-            //Specify LDAP timeout
-            TimeSpan mytimeout = new TimeSpan(0, 0, 1);
             bool ldapOK = false;
-            try
+            if (string.IsNullOrEmpty(ldapServer) == false)
             {
-                //ldapConnection.AuthType = AuthType.Negotiate;
-                //ldapConnection.AutoBind = false;
-                ldapConnection.Timeout = mytimeout;
-                ldapConnection.Bind();
-                form.OUTextBox = "Successfully authenticated to LDAP server " + ldapServer;
-                ldapOK = true;
-                ldapConnection.Dispose();
+                LdapConnection ldapConnection = new LdapConnection(new LdapDirectoryIdentifier(ldapServer));
+                TimeSpan mytimeout = new TimeSpan(0, 0, 3);
+                try
+                {
+                    /**ldapConnection.AuthType = AuthType.Negotiate;
+                    ldapConnection.AutoBind = false;*/
+                    ldapConnection.Timeout = mytimeout;
+                    ldapConnection.Bind();
+                    ldapOK = true;
+                    ldapConnection.Dispose();
+                }
+                catch (LdapException e)
+                {
+                    form.ldapLabel.ForeColor = System.Drawing.Color.FromArgb(179, 0, 0);
+                    ldapOK = false;
+                }
             }
-            catch (LdapException e)
+            if(ldapOK == true)
             {
-                form.OUTextBox = "Looks like I couldn't reach the LDAP server: " + ldapServer + "\n" + e.Message;
-                ldapOK = false;
+                form.ldapLabel.ForeColor = System.Drawing.Color.FromArgb(40, 135, 25);
             }
             return ldapOK;
         }
@@ -86,39 +126,58 @@ namespace Scavenger
         {
             DirectoryEntry ldapConnection = null;
             ldapConnection = new DirectoryEntry("LDAP://" + form.domainField);
+
             return ldapConnection;
 
          }
 
-        private List<string> GetOrgUnits()
+       /** private List<string> GetOrgUnits()
         {
-            //Declare List 
             List<string> orgUnits = new List<string>();
-            //Declare starting path
             DirectoryEntry ldapConnection = GetLdapConnection();
-            //Search for all organizational units
             DirectorySearcher searcher = new DirectorySearcher(ldapConnection);
             searcher.Filter = "(objectCategory=organizationalUnit)";
-            //Add each organizational path to the list
             foreach (SearchResult res in searcher.FindAll())
             {
                 orgUnits.Add(res.Path);
             }
+
             searcher.Dispose();
             ldapConnection.Dispose();
             return orgUnits;
-        }
+        }*/
 
-        private SearchResult GetUser()
+        private SearchResult GetUser(string user)
         {
             DirectoryEntry ldapConnection = GetLdapConnection();
             DirectorySearcher searcher = new DirectorySearcher(ldapConnection);
+            searcher.PropertiesToLoad.Add("displayname");
             searcher.PropertiesToLoad.Add("sammaccountname");
             searcher.PropertiesToLoad.Add("sn");
             searcher.PropertiesToLoad.Add("memberof");
+            searcher.Filter = "(|(cn=" + user + ")(samaccountname=" + user + ")(displayname=" + user + ")(sn=" + user + "))";
+            SearchResult result;
 
-            searcher.Filter = "(|(cn=" + form.userField + ")(samaccountname=" + form.userField + "))";
-            SearchResult result = searcher.FindOne();
+            try
+            {
+                result = searcher.FindOne();
+            }
+            catch(Exception e)
+            {
+                result = null;
+            }
+            if(result == null)
+            {
+                QuickDialogue quickDialogue = new QuickDialogue();
+                quickDialogue.StartPosition = FormStartPosition.CenterScreen;
+                bool checkString = String.IsNullOrEmpty(user);
+                if (checkString == false )
+                {
+                    quickDialogue.SetTextErrorLabel("User " + user + " not found");
+                }
+                quickDialogue.Show();
+            }
+
             searcher.Dispose();
             ldapConnection.Dispose(); 
             return result;

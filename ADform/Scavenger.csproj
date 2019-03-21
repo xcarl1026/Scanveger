@@ -50,6 +50,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompareResultWin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CompareResultWin.Designer.cs">
+      <DependentUpon>CompareResultWin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CompareWindowcs.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CompareWindowcs.Designer.cs">
+      <DependentUpon>CompareWindowcs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Comparison.cs" />
+    <Compile Include="QuickDialogue.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuickDialogue.Designer.cs">
+      <DependentUpon>QuickDialogue.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,6 +79,16 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Directory.cs" />
+    <Compile Include="User.cs" />
+    <EmbeddedResource Include="CompareResultWin.resx">
+      <DependentUpon>CompareResultWin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CompareWindowcs.resx">
+      <DependentUpon>CompareWindowcs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuickDialogue.resx">
+      <DependentUpon>QuickDialogue.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIForm.resx">
       <DependentUpon>UIForm.cs</DependentUpon>
     </EmbeddedResource>
